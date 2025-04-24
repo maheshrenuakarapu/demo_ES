@@ -1,3 +1,3 @@
 @echo off
-powershell -ExecutionPolicy Bypass -File "C:\StartEventScripterRemote\StartEventScripterRemote.ps1"
+powershell -ExecutionPolicy Bypass -File "StartEventScripterRemote.ps1"
 pause
