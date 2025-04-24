@@ -1,4 +1,4 @@
-$filePath = "C:\StartEventScripterRemote\ActiveHostMapping.txt"
+$filePath = "ActiveHostMapping.txt"
 
 $machines = Get-Content -Path $filePath | Select-Object -First 1
 
