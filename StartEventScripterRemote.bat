@@ -1,4 +1,4 @@
-$filePath = "C:\StartEventScripterRemote\ActiveHostMapping.txt"
+$filePath = "%ActiveHostMapping.txt%"
 
 $machines = Get-Content -Path $filePath | Select-Object -First 1
 
@@ -33,7 +33,7 @@ Test-Connection -ComputerName $ipAddress -Count 2
 
 
 
-C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
+%addLog.ps1% -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
 
 $eventScriptFile = "FI_AllCustomers_20_script.xml"
 
@@ -45,7 +45,7 @@ $test_script = "C:\Users\Administrator\Documents\UIScripts\$eventScriptFile"
 
 #Remove-PSSession -Session $remoteSession
 
-C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Starting Event Scripter on $hostname using storm script $eventScriptFile..."
+%addLog.ps1% -logToWrite "Starting Event Scripter on $hostname using storm script $eventScriptFile..."
 
 $block = {
     
