@@ -31,7 +31,7 @@ jobs:
          cmd /c StartEventScripterRemote.bat
       - name: Install Katalon
         run: |
-         curl -L -o katalon.zip  https://download.katalon.com/9.0.0/Katalon_Studio_Engine_Windows_64-9.0.0.zip
+         curl -L -o katalon.zip  https://download.katalon.com/9.0.0/Katalon_Studio_Engine_Windows_64-10.2.0.zip
          tar -xf katalon.zip
          ren "Katalon_Studio_Engine_Windows_64-9.0.0" katalon
       - name: Run Katalon Test 
