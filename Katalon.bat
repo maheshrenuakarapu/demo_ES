@@ -1,0 +1,1 @@
+"C:\Users\503422998\.katalon\packages\KSE-10.2.0\katalon.exe" -noSplash -runMode=console -projectPath="C:\Users\503422998\Katalon Studio\demo_katalon\demo_katalon.prj" -retry=0 -testSuitePath="Test Suites/Default" -executionProfile="deafult" -browserType="Chrome"
