@@ -27,8 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run the batch file
-        shell: pwsh
-        run: StartEventScripterRemote.bat
+        shell: powershell
+        run: StartEventScripterRemote.ps1
       
 
           
