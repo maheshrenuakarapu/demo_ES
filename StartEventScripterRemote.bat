@@ -1,41 +1,77 @@
-$dataCollectorSetName = "MyDataCollectorSet"
-$logPath = "C:\PerfData"
-$logFile = "$logPath\$dataCollectorSetName.csv"
-if (-not (Test-Path $logPath)) {
-	New-Item -Path $logPath -ItemType Directory
+$filePath = "C:\StartEventScripterRemote\ActiveHostMapping.txt"
+
+$machines = Get-Content -Path $filePath | Select-Object -First 1
+
+if ($machines -match ",") {
+$parts = $machines -split ","
+$ipAddress = $parts[0].Trim()
+$password = $parts[1].Trim()
+
+$trustedHosts = ($ipAddress -join ',')
+Write-Host "Adding the following machines to the TrustedHosts list"
+
+try {
+
+     Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $trustedHosts -Force
+	Write-Host "Successfully updated the TrustedHosts list"
+}  catch {
+	Write-Host "Failed to Update TrustedHosts list"
 }
-$counters = @(
-"\Processor(_Total)\% Processor Time",
-"\Memory\Available Mbytes",
-"\Network Interface(*)\Bytes Received/sec",
-"\Network Interface(*)\Bytes Sent/sec",
-"\Network Interface(*)\Bytes Total/sec",
-"\Network Interface(*)\Output Queue Length",
-"\PhysicalDisk(_Total)\% Idle Time",
-"\PhysicalDisk(_Total)\Current Disk Queue Length",
-"\PhysicalDisk(_Total)\Avg. Disk sec/Read",
-"\PhysicalDisk(_Total)\Avg. Disk sec/Write"
-)
-$counterString = $counters
-$intervalInSeconds = "1"
-#$duration = "00:00:10" 
-logman create counter $dataCollectorSetName -f csv -o $logFile -counters $counterString -s "localhost" -si $intervalInSeconds
-#logman update counter $dataCollectorSetName -update $intervalInSeconds
-logman start $dataCollectorSetName
-Write-Host "Started the collector. Press 'Esc' to stop the data collection."
-#Start-Sleep -Seconds ([TimeSpan]::Parse($duration).TotalSeconds)
-while ($true) {
-	$key = [System.Console]::ReadKey($true)
-if ($key.Key -eq [System.ConsoleKey]::Escape) {
-	logman stop $dataCollectorSetName
-	Write-Host "Data Collection Stopped."
-	break
-	}
+} else {
+	Write-Host "File not found"
 }
-logman stop $dataCollectorSetName
-Write-Host "Stopped the collector."
+Get-Item -Path WSMan:\localhost\Client\TrustedHosts
+
+$User = "Administrator"
+
+$SecurePassword = ConvertTo-SecureString "$Password" -AsPlainText -Force
+$Credential = New-Object System.Management.Automation.PSCredential ($User, $SecurePassword)
+
+Enter-PSSession -ComputerName $ipAddress -Credential $credential -ErrorAction Stop 
+Test-Connection -ComputerName $ipAddress -Count 2
 
 
 
 
+C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
 
+$eventScriptFile = "FI_AllCustomers_20_script.xml"
+
+$test_script = "C:\Users\Administrator\Documents\UIScripts\$eventScriptFile"
+
+#$remoteSession = New-PSSession $hostName -Credential $Credential
+#$remoteLocation = "C:\Users\Administrator\Documents\UIScripts"
+#Copy-Item -Path $test_script  -ToSession $remoteSession -Destination $remoteLocation
+
+#Remove-PSSession -Session $remoteSession
+
+C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Starting Event Scripter on $hostname using storm script $eventScriptFile..."
+
+$block = {
+    
+    param($scriptName)
+
+    $task_name = "EventScripter"
+    $toolLocation  = "C:\eterra\Distribution\Client\bin\EventScripter.exe"
+    $scriptLocation = "C:\Users\Administrator\Documents\FI_AllCustomers_20_script.xml"
+    $netconfLocation = "C:\eterra\Distribution\FantasyIsland\config\client\netconfes_EC2AMAZ-081HM05.xml"
+
+        
+    $proc = get-process -Name $task_name -ErrorAction SilentlyContinue
+
+    if ($proc -ne $null)
+    {
+        Write-Host "Event Scripter is found to be already running. Stopping it..."
+
+        stop-Process -Name $task_name
+    }
+
+    Write-Host "Event Scripter is started. Running the script...."
+
+    Start-Process -FilePath $toolLocation -ArgumentList "/NETCONF `"$netconfLocation`" /SCRIPT `"$scriptLocation`" /BATCH" -Wait -Verbose
+    #Start-Process -FilePath $toolPath -Wait -Verbose
+}
+
+Invoke-Command -ComputerName $ipAddress -Credential $Credential -Command $block -ArgumentList $eventScriptFile  -Verbose
+
+C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Event Scripter run completed on $hostname..."
