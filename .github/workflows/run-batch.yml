@@ -29,11 +29,11 @@ jobs:
       - name: Run the batch file
         run: |
          cmd /c StartEventScripterRemote.bat
-      - name: Install Katalon
-        run: |
-         curl -L -o katalon.zip  https://download.katalon.com/9.0.0/Katalon_Studio_Engine_Windows_64-9.0.0.zip
-         tar -xf katalon.zip
-         ren "Katalon_Studio_Engine_Windows_64-9.0.0" katalon
+      #- name: Install Katalon
+       # run: |
+        # curl -L -o katalon.zip  https://download.katalon.com/9.0.0/Katalon_Studio_Engine_Windows_64-9.0.0.zip
+         #tar -xf katalon.zip
+         #ren "Katalon_Studio_Engine_Windows_64-9.0.0" katalon
       - name: Run Katalon Test 
         run: |
           katalon\katalon.exe -noSplash ^
