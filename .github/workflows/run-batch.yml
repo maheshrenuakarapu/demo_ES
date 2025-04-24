@@ -27,7 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run the batch file
-        run: StartEventScripterRemote.bat
+        run: |
+         cmd /c StartEventScripterRemote.bat
       - name: Run the katalon
         run: Katalon.bat
       
