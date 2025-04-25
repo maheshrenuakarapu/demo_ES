@@ -37,7 +37,7 @@ C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Copying Event Scripter file 
 
 $eventScriptFile = "Sample_file_100.xml"
 
-$test_script = "C:\Users\Administrator\Documents\UIScripts\$eventScriptFile"
+$test_script = "C:\Users\Administrator\Documents\$eventScriptFile"
 
 #$remoteSession = New-PSSession $hostName -Credential $Credential
 #$remoteLocation = "C:\Users\Administrator\Documents\UIScripts"
