@@ -33,7 +33,7 @@ Test-Connection -ComputerName $ipAddress -Count 2
 
 
 
-addLog.ps1 -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
+C:\StartEventScripterRemote\addLog.ps1 -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
 
 $eventScriptFile = "Sample_file_100.xml"
 
