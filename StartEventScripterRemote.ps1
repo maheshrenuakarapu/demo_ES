@@ -35,7 +35,7 @@ Test-Connection -ComputerName $ipAddress -Count 2
 
 addLog.ps1 -logToWrite "Copying Event Scripter file $eventScriptFile to $hostname..."
 
-$eventScriptFile = "FI_AllCustomers_20_script.xml"
+$eventScriptFile = "Sample_file_100.xml"
 
 $test_script = "C:\Users\Administrator\Documents\UIScripts\$eventScriptFile"
 
@@ -53,8 +53,8 @@ $block = {
 
     $task_name = "EventScripter"
     $toolLocation  = "C:\eterra\Distribution\Client\bin\EventScripter.exe"
-    $scriptLocation = "C:\Users\Administrator\Documents\FI_AllCustomers_20_script.xml"
-    $netconfLocation = "C:\eterra\Distribution\FantasyIsland\config\client\netconfes_EC2AMAZ-081HM05.xml"
+    $scriptLocation = "C:\Users\Administrator\Documents\Sample_file_100.xml"
+    $netconfLocation = "C:\eterra\Distribution\FantasyIsland\config\client\netconfes_EC2AMAZ-A8QK7UM.xml"
 
         
     $proc = get-process -Name $task_name -ErrorAction SilentlyContinue
