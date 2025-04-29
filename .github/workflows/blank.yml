@@ -27,5 +27,5 @@ jobs:
 
       - name: Install Katalon
         run: |
-          cmd /c "C:\Users\503422996\Downloads\Katalon_Studio_Engine_Windows_64-10.2.0\katalonc.exe" -noSplash -runMode=console -projectPath="C:\Users\503422996\Katalon Studio\Demo_24th\Demo_24th.prj" -retry=0 -testSuitePath="Test Suites" -executionProfile="default" -browserType="Chrome" -apiKey=${{ secrets.KT_APIKEY }}""
+          cmd /c "C:\Users\503422996\Downloads\Katalon_Studio_Engine_Windows_64-10.2.0\katalonc.exe" -noSplash -runMode=console -projectPath="C:\Users\503422996\Katalon Studio\Demo_24th\Demo_24th.prj" -retry=0 -testSuitePath="Test Suites/DemoSuite" -executionProfile="default" -browserType="Chrome" -apiKey=${{ secrets.KT_APIKEY }}""
           
