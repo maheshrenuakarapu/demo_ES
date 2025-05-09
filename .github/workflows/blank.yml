@@ -27,6 +27,4 @@ jobs:
 
       - name: Run Katalon
         run: |
-          cmd /c "C:\Users\Administrator\Downloads\Katalon_Studio_Engine\Katalon_Studio_Engine_Windows_64-10.2.0\katalonc.exe" -noSplash -runMode=console -projectPath="C:\Users\Administrator\Katalon Studio\Demo_5th_Latest\Demo_5th_Latest.prj" -retry=0 -testSuitePath="Test Suites/Demo_Suite" -executionProfile="default" -browserType="Chrome" --config -webui.autoUpdateDrivers=true -apiKey=${{ secrets.KS_KEY }}""
-
-          
+          cmd /c "C:\Users\Administrator\Downloads\Katalon_Studio_Engine_Windows_64-10.2.0\katalonc.exe" -noSplash -runMode=console -projectPath="C:\Users\Administrator\Katalon Studio\Demo_test\Demo_test.prj" -retry=0 -testSuitePath="Test Suites/Demo" -executionProfile="default" -browserType="Chrome" --config -webui.autoUpdateDrivers=true -driverAutoDownload=true -consoleLog -logLevel=DEBUG -apiKey=c78a4a43-3ebb-4fc8-9935-3166e34bfe56""
